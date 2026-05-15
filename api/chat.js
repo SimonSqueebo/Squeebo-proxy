@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body || {};
+    console.log("BODY RECEIVED:", JSON.stringify(body));
 
     const model = body.model || "claude-haiku-4-5";
     const max_tokens = body.max_tokens || 1000;
@@ -39,10 +40,9 @@ export default async function handler(req, res) {
       messages,
     });
 
-    return res.status(200).json({
-      reply: response.content?.[0]?.text || "",
-      content: response.content,
-    });
+   return res.status(200).json({
+  content: response.content
+});
   } catch (error) {
     console.error("Claude error:", error);
 
